@@ -1,0 +1,3 @@
+# ignore ALL .log files
+*.pkg.tar.zst
+*.pkg.tar.zst.sig
