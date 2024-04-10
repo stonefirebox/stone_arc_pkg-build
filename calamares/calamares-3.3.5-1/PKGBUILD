@@ -1,6 +1,6 @@
-# Maintainer: Philip Müller <philm[at]manjaro[dog]org>
+# Maintainer: stonefirebox <stonefirebox@gmail.com>
 
-pkgname=calamares
+pkgname=stone_arc_calamares
 pkgver=3.3.5
 _pkgver=3.3.5
 pkgrel=1
