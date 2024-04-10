@@ -1,3 +1,4 @@
 # ignore ALL .log files
+*.tar.gz
 *.pkg.tar.zst
 *.pkg.tar.zst.sig
