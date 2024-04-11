@@ -1,6 +1,6 @@
 # Maintainer: stonefirebox <stonefirebox@gmail.com>
 pkgname=stone_arc-dwm
-_pkgname=stone_arc-dwm
+_pkgname=stone_arc_dwm
 _destname1="/etc/skel/.config/"
 _destname2="/usr/share/doc/dwm/"
 _destname3="/usr/share/licenses/dwm/"
