@@ -1,0 +1,54 @@
+# Maintainer: stonefirebox <stonefirebox@gmail.com>
+pkgname=stone_arc-dwm
+_pkgname=stone_arc-dwm
+_destname1="/etc/skel/.config/"
+_destname2="/usr/share/doc/dwm/"
+_destname3="/usr/share/licenses/dwm/"
+_destname4="/usr/share/man/man1/"
+_destname5="/usr/share/xsessions/"
+_licensedir="/usr/share/arcolinux/licenses/"
+pkgver=21.01
+pkgrel=21
+pkgdesc="Configuration files for stone_arc Iso"
+arch=('any')
+url="https://github.com/stonefirebox/stone_arc_dwm"
+license=('GPL3')
+makedepends=('git')
+depends=()
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+source=(${_pkgname}::"git+https://github.com/stonefirebox/${_pkgname}.git")
+sha256sums=('SKIP')
+install='readme.install'
+
+build() {
+  cd "$srcdir/$_pkgname/etc/skel/.config/stone_arc-dwm/"
+  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 FREETYPEINC=/usr/include/freetype2
+}
+
+package() {
+
+  cd "$srcdir/$_pkgname/etc/skel/.config/stone_arc-dwm/"
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+
+	install -dm755 ${pkgdir}${_licensedir}${_pkgname}
+	install -m644  ${srcdir}/${_pkgname}/LICENSE ${pkgdir}${_licensedir}${_pkgname}
+
+	install -dm755 ${pkgdir}${_destname1}
+	cp -r  ${srcdir}/${_pkgname}${_destname1}* ${pkgdir}${_destname1}
+
+	# install -dm755 ${pkgdir}${_destname2}
+	# cp -r  ${srcdir}/${_pkgname}${_destname2}* ${pkgdir}${_destname2}
+
+	# install -dm755 ${pkgdir}${_destname3}
+	# cp -r  ${srcdir}/${_pkgname}${_destname3}* ${pkgdir}${_destname3}
+
+	# install -dm755 ${pkgdir}${_destname4}
+	# cp -r  ${srcdir}/${_pkgname}${_destname4}* ${pkgdir}${_destname4}
+
+	install -dm755 ${pkgdir}${_destname5}
+	cp -r  ${srcdir}/${_pkgname}${_destname5}* ${pkgdir}${_destname5}
+	mv ${pkgdir}${_destname5}/dwm.desktop ${pkgdir}${_destname5}/dwm_stone_arc.desktop
+	sed -i "s/Exec=dwm/Exec=dwm_stone_arc/g" ${pkgdir}${_destname5}/dwm_stone_arc.desktop
+	sed -i "s/Name=Dwm/Name=Dwm_stone_arc/g" ${pkgdir}${_destname5}/dwm_stone_arc.desktop	
+}
