@@ -1,0 +1,29 @@
+# Maintainer: Philip Müller <philm[at]manjaro[dot]org>
+# Maintainer: Bernhard Landauer <bernhard[at]manjaro[dot]org>
+
+# Arch credits:
+# Pierre Schmitz <pierre@archlinux.de>
+
+pkgname=stone_arc-keyring
+pkgver=20240413
+pkgrel=4
+pkgdesc="stone_arc PGP keyring"
+arch=('any')
+license=('GPL')
+depends=('pacman')
+install="${pkgname}.install"
+source=('Makefile'
+        'stone_arc.gpg'
+        'stone_arc-revoked'
+        'stone_arc-trusted')
+sha256sums=('0ce8890be3f5e8f82f5342c28429572f775c66ca538fd1988447071f13454bbe'
+            '92c605a87d86309c3a33bfd0e7727d6181be15b4479e5a0856bf54fe68bc59e0'
+            '01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b'
+            'dbd7e1c2a2337f8707cb410afdb5fbe46982c3d2ca0ffd6723b435fec86fcdeb')
+pkgver() {
+  date +%Y%m%d
+}
+
+package() {
+  make DESTDIR="${pkgdir}" install
+}
